@@ -15,21 +15,12 @@
                     <div class="flex items-center">
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ url(path: '/home') }}" class="text-gray-700 hover:text-emerald-500 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                                <a href="{{ url(path: '/dashboard') }}" class="text-gray-700 hover:text-emerald-500 px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
                             @else
-                                asdf
                                 <a href="{{ route('login') }}" class="text-gray-700 hover:text-emerald-500 px-3 py-2 rounded-md text-sm font-medium">Log in</a>
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}" class="ml-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700">Register</a>
                                 @endif
-                            @endauth
-                        @endif
-                        @if (Route::has('login'))
-                            asdf
-                            @auth
-                                <div>AUTH BLOCK</div>
-                            @else
-                                <div>ELSE BLOCK</div>
                             @endauth
                         @endif
                     </div>
