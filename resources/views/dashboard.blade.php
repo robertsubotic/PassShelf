@@ -5,5 +5,6 @@
     </head>
     <body>
         Ur authenticated
+        <button onclick="location.href='{{ route('signout') }}'">Sign Out</button>
     </body>
 </html>

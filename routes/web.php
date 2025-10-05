@@ -33,6 +33,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
 
+Route::get('/signout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect('/');
+})->name('signout');
+
 // POST
 
 Route::post('register', [RegisterController::class, 'customRegister'])->name(name: 'register'); 
