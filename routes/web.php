@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Password;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,8 @@ Route::get('/login', function () {
 })->name('login');;
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $passwords = Password::where('user_id', Auth::id())->get();
+    return view('dashboard', compact('passwords'));
 })->middleware('auth')->name('dashboard');
 
 Route::get('/signout', function () {
@@ -43,5 +46,6 @@ Route::get('/signout', function () {
 // POST
 
 Route::post('register', [RegisterController::class, 'customRegister'])->name(name: 'register'); 
-Route::post('login', [LoginController::class, 'customLogin'])->name(name: 'login'); 
+Route::post('login', [LoginController::class, 'customLogin'])->name(name: 'login');
+Route::post('store_password', [\App\Http\Controllers\PasswordController::class, 'store'])->middleware('auth')->name('password.store'); 
 
