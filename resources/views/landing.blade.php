@@ -4,7 +4,6 @@
         @include('partials.header')
     </head>
     <body class="antialiased bg-gray-50">
-        <!-- Navigation -->
         <nav class="bg-white shadow-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
@@ -28,7 +27,6 @@
             </div>
         </nav>
 
-        <!-- Hero Section -->
         <div class="relative bg-white overflow-hidden">
             <div class="max-w-7xl mx-auto">
                 <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
@@ -57,7 +55,6 @@
                 </div>
             </div>
 
-            <!-- Features Section -->
             <div class="py-12 bg-white" id="features">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="lg:text-center">
@@ -101,7 +98,6 @@
                 </div>
             </div>
 
-            <!-- Footer -->
             <footer class="bg-white">
                 <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
                     <div class="flex justify-center space-x-6 md:order-2">
