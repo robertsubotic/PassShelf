@@ -30,6 +30,19 @@ class PasswordController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Password stored successfully!');
     }
+
+    public function delete(Request $request)
+    {
+        $passwordId = $request->route('id');
+        $password = Password::where('id', $passwordId)->where('user_id', Auth::id())->first();
+
+        if ($password) {
+            $password->delete();
+            return redirect()->route('dashboard')->with('success', 'Password deleted successfully!');
+        } else {
+            return redirect()->route('dashboard')->with('error', 'Something went wrong.');
+        }
+    }
 //EndRegion
 
 }

@@ -39,7 +39,7 @@
                             <span class="block text-emerald-500">With PassShelf</span>
                         </h1>
                         <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Your personal password manager that helps you keep your digital life secure and organized. Store, generate, and access your passwords safely from anywhere.
+                            Your personal password manager. Store, generate, and access your passwords safely from anywhere.
                         </p>
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-start">
                             <div class="rounded-md shadow">
@@ -96,20 +96,6 @@
                                     Generate strong, unique passwords with our built-in password generator.
                                 </dd>
                             </div>
-
-                            <div class="relative">
-                                <dt>
-                                    <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-emerald-500 text-white">
-                                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                                        </svg>
-                                    </div>
-                                    <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Cross-Platform Access</p>
-                                </dt>
-                                <dd class="mt-2 ml-16 text-base text-gray-500">
-                                    Access your passwords from any device, anytime, anywhere.
-                                </dd>
-                            </div>
                         </dl>
                     </div>
                 </div>
@@ -119,7 +105,7 @@
             <footer class="bg-white">
                 <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
                     <div class="flex justify-center space-x-6 md:order-2">
-                        <span class="text-base text-gray-500">&copy; 2025 PassShelf. All rights reserved.</span>
+                        <span class="text-base text-gray-500">&copy; 2025 PassShelf.</span>
                     </div>
                 </div>
             </footer>

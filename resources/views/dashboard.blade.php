@@ -23,19 +23,37 @@
                     maxlength="255" 
                     class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-emerald-500 focus:border-emerald-500 outline-none"
                 />
-                <input 
-                    type="password" 
-                    name="password" 
-                    placeholder="Password *" 
-                    class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-emerald-500 focus:border-emerald-500 outline-none"
-                />
+                <div class="flex items-center space-x-2">
+                    <input 
+                        type="password" 
+                        name="password" 
+                        id="password-input"
+                        placeholder="Password *" 
+                        class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-emerald-500 focus:border-emerald-500 outline-none flex-1"
+                    />
+                    <button
+                        type="button"
+                        class="text-gray-500 hover:text-gray-700 focus:outline-none text-xs px-2 py-1 rounded"
+                        onclick="togglePassword(this)"
+                    >
+                        Show
+                    </button>
+                    <button 
+                        type="button"
+                        onclick="generatePassword()"
+                        class="text-xs bg-gray-200 hover:bg-gray-800 hover:text-white text-gray-700 px-2 py-1 rounded transition"
+                        style="white-space: nowrap;"
+                    >
+                        Generate a Secure Password
+                    </button>
+                </div>
                 <button 
                     type="submit" 
                     class="bg-emerald-500 text-white text-sm font-semibold py-2 rounded-lg hover:bg-emerald-600 transition"
                 >
                     + Add Password
                 </button>
-            </form>        
+            </form>       
         </div>
 
         @if (session('success'))
@@ -46,11 +64,10 @@
         
         @if ($errors->any())
             <div class="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
-                <ul class="list-disc list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                    <br />
+                @endforeach
             </div>
         @endif
 
@@ -79,7 +96,7 @@
                                         type="password"
                                         value="{{ Crypt::decryptString($password->password) }}"
                                         readonly
-                                        class="border border-gray-300 rounded-lg px-2 py-1 text-sm text-gray-600 w-32 focus:outline-none"
+                                        class="border border-gray-300 rounded-lg px-2 py-1 text-sm text-gray-600 w-64 focus:outline-none"
                                     />
                                     <button
                                         type="button"
@@ -88,6 +105,23 @@
                                     >
                                         Show
                                     </button>
+                                    <form
+                                        action="{{ route('password.delete', $password->id) }}"
+                                        method="POST"
+                                        class="inline"
+                                        onsubmit="return confirm('Are you sure you want to delete this password?')"
+                                    >
+                                        @csrf
+                                        <button
+                                            type="submit"
+                                            class="ml-2 text-gray-500 hover:text-red-500 focus:outline-none flex items-center"
+                                            title="Delete"
+                                        >
+                                            <svg class="w-5 h-5 transition-colors" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M6 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8zm2-5a1 1 0 00-1-1h-4a1 1 0 00-1 1v1H4a1 1 0 100 2h12a1 1 0 100-2h-2V3zM5 6v10a2 2 0 002 2h6a2 2 0 002-2V6H5z"/>
+                                            </svg>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -101,6 +135,38 @@
         </div>
     </div>
 <script>
+function generatePassword() {
+    const passwordInput = document.getElementById('password-input');
+
+    const lower = "abcdefghijklmnopqrstuvwxyz";
+    const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const digits = "0123456789";
+    const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+    const allChars = lower + upper + digits + symbols;
+    const length = 16; // You can modify this later, or also customize this by user input
+
+    const getRandomChar = (charset) => charset[Math.floor(crypto.getRandomValues(new Uint32Array(1))[0] / (0xffffffff + 1) * charset.length)];
+
+    let password = [
+        getRandomChar(lower),
+        getRandomChar(upper),
+        getRandomChar(digits),
+        getRandomChar(symbols)
+    ];
+
+    for (let i = password.length; i < length; i++) {
+        password.push(getRandomChar(allChars));
+    }
+
+    for (let i = password.length - 1; i > 0; i--) {
+        const j = Math.floor(crypto.getRandomValues(new Uint32Array(1))[0] / (0xffffffff + 1) * (i + 1));
+        [password[i], password[j]] = [password[j], password[i]];
+    }
+
+    passwordInput.value = password.join('');
+
+}
+
 function togglePassword(button) {
     const input = button.previousElementSibling;
     if (input.type === "password") {

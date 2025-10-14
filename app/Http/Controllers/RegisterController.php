@@ -23,6 +23,11 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+        ], [
+            'name.max' => 'Username Maximum characters are 255.',
+            'email.unique' => 'A user already exists with this email.',
+            'password.min' => 'Minimum characters are 6.',
+            'password.confirmed' => 'Password confirmation does not match.',
         ]);
 
         $user = User::create([

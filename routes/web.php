@@ -48,4 +48,4 @@ Route::get('/signout', function () {
 Route::post('register', [RegisterController::class, 'customRegister'])->name(name: 'register'); 
 Route::post('login', [LoginController::class, 'customLogin'])->name(name: 'login');
 Route::post('store_password', [\App\Http\Controllers\PasswordController::class, 'store'])->middleware('auth')->name('password.store'); 
-
+Route::post('delete_password/{id}', [\App\Http\Controllers\PasswordController::class, 'delete'])->middleware('auth')->name('password.delete');
