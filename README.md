@@ -1,2 +1,2 @@
 # PassShelf
-Modern Password Manager
+Simple Password Manager
