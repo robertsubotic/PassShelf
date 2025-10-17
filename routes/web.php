@@ -19,33 +19,43 @@ use App\Models\Password;
 
 // GET
 
-Route::get('/', function () {
-    return view('landing');
-})->name(name: 'landing');
+Route::get("/", fn() => view("landing"))->name(name: "landing");
 
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
+Route::get("/register", fn() => view("register"))->name("register");
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');;
+Route::get("/login", fn() => view("login"))->name("login");
 
-Route::get('/dashboard', function () {
-    $passwords = Password::where('user_id', Auth::id())->get();
-    return view('dashboard', compact('passwords'));
-})->middleware('auth')->name('dashboard');
+Route::get("/dashboard", function () {
+    $passwords = Password::where("user_id", Auth::id())->get();
+    return view("dashboard", compact("passwords"));
+})
+    ->middleware("auth")
+    ->name("dashboard");
 
-Route::get('/signout', function () {
+Route::get("/signout", function () {
     Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
-    return redirect('/');
-})->name('signout');
+    return redirect("/");
+})->name("signout");
 
 // POST
 
-Route::post('register', [RegisterController::class, 'customRegister'])->name(name: 'register'); 
-Route::post('login', [LoginController::class, 'customLogin'])->name(name: 'login');
-Route::post('store_password', [\App\Http\Controllers\PasswordController::class, 'store'])->middleware('auth')->name('password.store'); 
-Route::post('delete_password/{id}', [\App\Http\Controllers\PasswordController::class, 'delete'])->middleware('auth')->name('password.delete');
+Route::post("register", [RegisterController::class, "customRegister"])->name(
+    name: "register",
+);
+Route::post("login", [LoginController::class, "customLogin"])->name(
+    name: "login",
+);
+Route::post("store_password", [
+    \App\Http\Controllers\PasswordController::class,
+    "store",
+])
+    ->middleware("auth")
+    ->name("password.store");
+Route::post("delete_password/{id}", [
+    \App\Http\Controllers\PasswordController::class,
+    "delete",
+])
+    ->middleware("auth")
+    ->name("password.delete");
