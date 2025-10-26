@@ -41,7 +41,7 @@
                 />
                 <button 
                     type="submit" 
-                    class="bg-emerald-500 text-white text-sm font-semibold py-2 rounded-lg hover:bg-emerald-600 transition"
+                    class="bg-gray-500 text-white text-sm font-semibold py-2 rounded-lg hover:bg-gray-600 transition"
                 >
                     Save Changes
                 </button>
@@ -79,7 +79,7 @@
                 />
                 <button 
                     type="submit" 
-                    class="bg-emerald-500 text-white text-sm font-semibold py-2 rounded-lg hover:bg-emerald-600 transition"
+                    class="bg-gray-500 text-white text-sm font-semibold py-2 rounded-lg hover:bg-gray-600 transition"
                 >
                     Change Password
                 </button>
