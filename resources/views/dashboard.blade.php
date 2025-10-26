@@ -5,7 +5,15 @@
 </head>
 <body class="bg-gray-50 min-h-screen">
     <div class="max-w-5xl mx-auto mt-10 p-6 bg-white rounded shadow">
-        <h1 class="text-2xl font-bold mb-4">Welcome, {{ auth()->user()->name }}</h1>
+        <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold">
+            Welcome, {{ auth()->user()->name }}
+        </h1>
+        <a href="{{ route('account') }}" 
+            class="text-emerald-600 hover:underline">
+            Edit Account
+        </a>
+        </div>
         <div class="mb-6">
             <form action="{{ route('password.store') }}" method="POST" class="flex flex-col space-y-3 bg-white p-4 rounded-xl shadow-md">
                 @csrf

@@ -32,6 +32,13 @@ Route::get("/dashboard", function () {
     ->middleware("auth")
     ->name("dashboard");
 
+Route::get("/account", function () {
+    return view("account");
+})
+    ->middleware("auth")
+    ->name("account");
+
+
 Route::get("/signout", function () {
     Auth::logout();
     request()->session()->invalidate();
@@ -53,9 +60,24 @@ Route::post("store_password", [
 ])
     ->middleware("auth")
     ->name("password.store");
+
 Route::post("delete_password/{id}", [
     \App\Http\Controllers\PasswordController::class,
     "delete",
 ])
     ->middleware("auth")
     ->name("password.delete");
+
+Route::post("account/edit", [
+    \App\Http\Controllers\AccountController::class,
+    "editAccount",
+])
+    ->middleware("auth")
+    ->name("account.edit");
+
+Route::post("account/change_password", [
+    \App\Http\Controllers\AccountController::class,
+    "changePassword",
+])
+    ->middleware("auth")
+    ->name("account.change_password");
