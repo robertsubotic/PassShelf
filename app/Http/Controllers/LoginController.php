@@ -7,6 +7,7 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Facades\RateLimiter;
 
 class LoginController extends Controller
 {
@@ -24,11 +25,16 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        $email = (string) $request->input('email');
+        $key = $email . $request->ip();
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
+            RateLimiter::clear('login|' . $key);
+
             return redirect()->intended('dashboard')
-                         ->with('success', 'Signed in successfully');
+                            ->with('success', 'Signed in successfully');
         }
 
         return back()->withErrors([

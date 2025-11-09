@@ -51,9 +51,10 @@ Route::get("/signout", function () {
 Route::post("register", [RegisterController::class, "customRegister"])->name(
     name: "register",
 );
-Route::post("login", [LoginController::class, "customLogin"])->name(
-    name: "login",
-);
+Route::post("login", [LoginController::class, "customLogin"])
+    ->middleware('throttle:login')
+    ->name("login");
+
 Route::post("store_password", [
     \App\Http\Controllers\PasswordController::class,
     "store",
