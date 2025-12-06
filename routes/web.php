@@ -6,19 +6,6 @@ use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Password;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-// GET
-
 Route::get("/", fn() => view("landing"))->name(name: "landing");
 
 Route::get("/register", fn() => view("register"))->name("register");
@@ -38,6 +25,12 @@ Route::get("/account", function () {
     ->middleware("auth")
     ->name("account");
 
+Route::get("/password/edit/{id}", [
+    \App\Http\Controllers\PasswordController::class,
+    "edit",
+])
+    ->middleware("auth")
+    ->name("password.edit");
 
 Route::get("/signout", function () {
     Auth::logout();
@@ -45,8 +38,6 @@ Route::get("/signout", function () {
     request()->session()->regenerateToken();
     return redirect("/");
 })->name("signout");
-
-// POST
 
 Route::post("register", [RegisterController::class, "customRegister"])->name(
     name: "register",
@@ -68,6 +59,13 @@ Route::post("delete_password/{id}", [
 ])
     ->middleware("auth")
     ->name("password.delete");
+
+Route::post("password/update/{id}", [
+    \App\Http\Controllers\PasswordController::class,
+    "update",
+])
+    ->middleware("auth")
+    ->name("password.update");
 
 Route::post("account/edit", [
     \App\Http\Controllers\AccountController::class,

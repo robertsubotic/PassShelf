@@ -43,6 +43,30 @@ class PasswordController extends Controller
             return redirect()->route('dashboard')->with('error', 'Something went wrong.');
         }
     }
+
+    public function edit($id)
+    {
+        $password = Password::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        return view('password-edit', compact('password'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $password = Password::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        $validated = $request->validate([
+            'service_name' => 'required|string|max:255',
+            'username_email' => 'nullable|string|max:255',
+            'password' => 'required|string',
+        ]);
+
+        $password->service_name = $validated['service_name'];
+        $password->username_email = $validated['username_email'] ?? null;
+        $password->password = Crypt::encryptString($validated['password']);
+        $password->save();
+
+        return response()->json(['success' => true]);
+    }
 //EndRegion
 
 }
