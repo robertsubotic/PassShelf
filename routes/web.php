@@ -6,11 +6,17 @@ use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Password;
 
-Route::get("/", fn() => view("landing"))->name(name: "landing");
+Route::get("/", fn() => view("landing"))
+    ->middleware('guest')
+    ->name("landing");
 
-Route::get("/register", fn() => view("register"))->name("register");
+Route::get("/register", fn() => view("register"))
+    ->middleware('guest')
+    ->name("register");
 
-Route::get("/login", fn() => view("login"))->name("login");
+Route::get("/login", fn() => view("login"))
+    ->middleware('guest')
+    ->name("login");
 
 Route::get("/dashboard", function () {
     $passwords = Password::where("user_id", Auth::id())->get();
