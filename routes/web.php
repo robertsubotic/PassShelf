@@ -31,6 +31,11 @@ Route::get("/account", function () {
     ->middleware("auth")
     ->name("account");
 
+Route::get("/profile/{id}", function ($id) {
+    $user = \App\Models\User::findOrFail($id);
+    return view("profile", compact("user"));
+})->name("profile");
+
 Route::get("/password/edit/{id}", [
     \App\Http\Controllers\PasswordController::class,
     "edit",

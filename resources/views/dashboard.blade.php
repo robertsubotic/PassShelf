@@ -9,10 +9,16 @@
         <h1 class="text-2xl font-bold">
             Welcome, {{ auth()->user()->name }}
         </h1>
-        <a href="{{ route('account') }}" 
-            class="text-emerald-600 hover:underline">
-            Edit Account
-        </a>
+        <div class="flex space-x-4">
+            <a href="{{ route('profile', auth()->user()->id) }}" 
+                class="text-emerald-600 hover:underline">
+                View Profile
+            </a>
+            <a href="{{ route('account') }}" 
+                class="text-emerald-600 hover:underline">
+                Edit Account
+            </a>
+        </div>
         </div>
         <div class="mb-6">
             <form action="{{ route('password.store') }}" method="POST" class="flex flex-col space-y-3 bg-white p-4 rounded-xl shadow-md">
