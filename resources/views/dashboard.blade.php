@@ -99,8 +99,29 @@
                     @foreach ($passwords as $password)
                         <tr id="row-{{ $password->id }}">
                             <td class="px-4 py-2 text-sm text-gray-800">
-                                <span class="view-mode">{{ $password->service_name }}</span>
-                                <input type="text" class="edit-mode hidden border border-gray-300 rounded-lg px-2 py-1 text-sm w-full" value="{{ $password->service_name }}" data-field="service_name" />
+                                <div class="flex items-center">
+                                    <span class="view-mode flex items-center">
+                                        @php
+                                            $logoUrl = getServiceLogo($password->service_name);
+                                        @endphp
+                                        @if($logoUrl)
+                                            <img src="{{ $logoUrl }}" 
+                                                 alt="{{ $password->service_name }}" 
+                                                 class="w-5 h-5 mr-2 rounded-sm flex-shrink-0 transition-all duration-200 hover:scale-110"
+                                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';"
+                                            />
+                                            <div class="w-5 h-5 mr-2 rounded-sm flex items-center justify-center text-xs flex-shrink-0 bg-gradient-to-br from-gray-500 to-gray-600 text-white font-semibold" style="display: none;">
+                                                {{ strtoupper(substr($password->service_name, 0, 1)) }}
+                                            </div>
+                                        @else
+                                            <div class="w-5 h-5 mr-2 rounded-sm flex items-center justify-center text-xs flex-shrink-0 bg-gradient-to-br from-gray-500 to-gray-600 text-white font-semibold">
+                                                {{ strtoupper(substr($password->service_name, 0, 1)) }}
+                                            </div>
+                                        @endif
+                                        {{ $password->service_name }}
+                                    </span>
+                                    <input type="text" class="edit-mode hidden border border-gray-300 rounded-lg px-2 py-1 text-sm w-full" value="{{ $password->service_name }}" data-field="service_name" />
+                                </div>
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-800">
                                 <span class="view-mode">{{ $password->username_email ?? '-' }}</span>
